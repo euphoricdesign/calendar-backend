@@ -1,7 +1,8 @@
 import { Router } from "express";
-import { loginUser, registerNewUser } from "../controllers/userControllers";
+import { loginUser, registerNewUser, revalidateToken } from "../controllers/userControllers";
 import { body } from "express-validator"
 import validateFields from "../middlewares/validateFields";
+import validateJwt from "../middlewares/validateJwt";
 
 const userRouter = Router()
 
@@ -26,5 +27,7 @@ userRouter.post('/login', [
         .notEmpty().withMessage('La contraseña es obligatoria')
         .isLength({ min: 6 }).withMessage('La contraseña debe tener al menos 6 caracteres')
 ],loginUser)
+
+userRouter.get('/renew',validateJwt, revalidateToken)
 
 export default userRouter
