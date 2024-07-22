@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import authRouter from './authRouter'
+import userRouter from './userRouter'
 import eventRouter from './eventRouter'
 
 
@@ -7,7 +7,7 @@ const router = Router()
 
 
 // Montando sub-router
-router.use('/auth', authRouter)
+router.use('/auth', userRouter)
 router.use('/events', eventRouter)
 
 
