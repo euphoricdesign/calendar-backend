@@ -1,7 +1,9 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
 import { User } from "./User";
 
-@Entity()
+@Entity({
+    name: "events"
+})
 export class Event {
     @PrimaryGeneratedColumn()
     id: number
