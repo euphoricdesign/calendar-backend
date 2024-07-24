@@ -2,9 +2,9 @@
   "name": "calendar-backend",
   "version": "1.0.0",
   "description": "",
-  "main": "src/index.ts",
+  "main": "dist/index.js",
   "scripts": {
-    "start": "nodemon",
+    "start": "node dist/index.js",
     "build": "tsc",
     "dev": "ts-node src/index.ts"
   },
