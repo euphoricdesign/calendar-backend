@@ -10,5 +10,5 @@ AppDataSource.initialize().then(() => {
     server.listen(process.env.PORT, () => {
         console.log(`Servidor escuchando en el puerto ${process.env.PORT}`)
     })
-}).catch((error) => console.log(error))
+}).catch((error:any) => console.log(error))
 
