@@ -18,10 +18,13 @@ const UserRepository_1 = __importDefault(require("../repositories/UserRepository
 const CredentialRepository_1 = __importDefault(require("../repositories/CredentialRepository"));
 const bcrypt_1 = __importDefault(require("bcrypt"));
 class CustomError extends Error {
-    constructor(message, statusCode) {
+    constructor(message, statusCode, errors) {
         super(message);
+        this.name = this.constructor.name;
         this.statusCode = statusCode;
-        this.message = message;
+        this.errors = errors;
+        // Esto es para mantener un stack trace apropiado
+        Error.captureStackTrace(this, this.constructor);
     }
 }
 exports.CustomError = CustomError;
@@ -60,7 +63,14 @@ const loginUserService = (credentials) => __awaiter(void 0, void 0, void 0, func
         }
     }
     catch (error) {
-        throw error;
+        if (error instanceof CustomError) {
+            // Error personalizado, devolver el mensaje específico al usuario
+            throw error; // Propagar el mismo error
+        }
+        else {
+            console.error("Error en loginUserService:", error);
+            throw new CustomError("Error al loguear usuario", 500);
+        }
     }
 });
 exports.loginUserService = loginUserService;

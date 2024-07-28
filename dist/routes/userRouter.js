@@ -27,7 +27,8 @@ userRouter.post('/login', [
         .isEmail().withMessage('Debe ingresar un email válido'),
     (0, express_validator_1.body)('password')
         .notEmpty().withMessage('La contraseña es obligatoria')
-        .isLength({ min: 6 }).withMessage('La contraseña debe tener al menos 6 caracteres')
+        .isLength({ min: 6 }).withMessage('La contraseña debe tener al menos 6 caracteres'),
+    validateFields_1.default
 ], userControllers_1.loginUser);
 userRouter.get('/renew', validateJwt_1.default, userControllers_1.revalidateToken);
 exports.default = userRouter;

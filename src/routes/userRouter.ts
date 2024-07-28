@@ -25,7 +25,8 @@ userRouter.post('/login', [
         .isEmail().withMessage('Debe ingresar un email válido'),
     body('password')
         .notEmpty().withMessage('La contraseña es obligatoria')
-        .isLength({ min: 6 }).withMessage('La contraseña debe tener al menos 6 caracteres')
+        .isLength({ min: 6 }).withMessage('La contraseña debe tener al menos 6 caracteres'),
+        validateFields
 ],loginUser)
 
 userRouter.get('/renew',validateJwt, revalidateToken)

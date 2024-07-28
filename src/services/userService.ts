@@ -8,15 +8,21 @@ import bcrypt from 'bcrypt'
 
 
 
+
 export class CustomError extends Error {
     statusCode: number;
-  
-    constructor(message: string, statusCode: number) {
-      super(message);
-      this.statusCode = statusCode;
-      this.message = message
+    errors?: any[];
+
+    constructor(message: string, statusCode: number, errors?: any[]) {
+        super(message);
+        this.name = this.constructor.name;
+        this.statusCode = statusCode;
+        this.errors = errors;
+        
+        // Esto es para mantener un stack trace apropiado
+        Error.captureStackTrace(this, this.constructor);
     }
-  }
+}
 
 
 
@@ -60,6 +66,12 @@ export const loginUserService = async (credentials: any) => { //* Ver de crear u
             return user
         }
     } catch (error) {
-        throw error
+        if (error instanceof CustomError) {
+            // Error personalizado, devolver el mensaje específico al usuario
+            throw error; // Propagar el mismo error
+        } else {
+            console.error("Error en loginUserService:", error);
+            throw new CustomError("Error al loguear usuario", 500);
+        }
     }
 }
