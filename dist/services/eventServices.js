@@ -15,7 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.deleteEventService = exports.updateEventService = exports.createNewEventService = exports.getAllEventsService = void 0;
 const EventRepository_1 = __importDefault(require("../repositories/EventRepository"));
 const UserRepository_1 = __importDefault(require("../repositories/UserRepository"));
-const userService_1 = require("./userService");
+const userService_1 = require("../services/userService");
 const getAllEventsService = () => __awaiter(void 0, void 0, void 0, function* () {
     const eventList = EventRepository_1.default.find({
         relations: {

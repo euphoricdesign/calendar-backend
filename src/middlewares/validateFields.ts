@@ -1,12 +1,14 @@
 import { validationResult } from "express-validator"
 import { Request, Response, NextFunction } from "express"
+import { CustomError } from "../services/userService";
 
 const validateFields = (req: Request, res: Response, next: NextFunction) => {
     const errors = validationResult(req)
     if (!errors.isEmpty()) {
-        return res.status(400).json({ ok: false, errors: errors.array() })
+        next(new CustomError('Error de validación', 400, errors.array()));
+    } else {
+        next()
     }
-    next()
 }
 
 export default validateFields

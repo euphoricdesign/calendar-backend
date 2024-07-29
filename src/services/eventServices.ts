@@ -1,6 +1,6 @@
 import EventRepository from "../repositories/EventRepository"
 import UserRepository from "../repositories/UserRepository"
-import { CustomError } from "./userService"
+import { CustomError } from "../services/userService"
 
 
 export const getAllEventsService = async () => {
