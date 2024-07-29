@@ -8,7 +8,11 @@ const server = express();
 
 server.use(morgan('dev'))
 
-server.use(cors()) 
+server.use(cors({
+    origin: 'https://tu-frontend-url-en-netlify.com',
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    allowedHeaders: ['Content-Type', 'Authorization']
+  }));
 
 server.use(express.json())
 
